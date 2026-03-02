@@ -15,7 +15,7 @@ export default function CategoryFilter({
 }: CategoryFilterProps) {
   return (
     <div className="overflow-x-auto pb-1 -mx-1 px-1 scrollbar-hide">
-      <div className="flex gap-1.5 min-w-max">
+      <div className="flex gap-2 min-w-max">
         {categories.map((category) => {
           const isActive = selected === category;
           const count = category === "All" ? undefined : counts[category];
@@ -24,19 +24,15 @@ export default function CategoryFilter({
             <button
               key={category}
               onClick={() => onChange(category)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-[6px] text-[13px] font-medium transition-all duration-150 whitespace-nowrap border ${
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-[6px] text-[13px] transition-all whitespace-nowrap border ${
                 isActive
-                  ? "bg-accent-purple border-accent-purple text-white"
-                  : "bg-transparent border-border-default text-text-secondary hover:border-border-light hover:text-text-primary"
+                  ? "bg-accent-blue border-accent-blue text-white font-medium"
+                  : "bg-bg-card border-border-color text-text-secondary hover:border-border-hover hover:text-text-primary"
               }`}
             >
               {category}
               {count !== undefined && (
-                <span
-                  className={`text-[11px] ${
-                    isActive ? "text-white/50" : "text-text-muted"
-                  }`}
-                >
+                <span className={isActive ? "text-white/60" : "text-text-dim"}>
                   {count}
                 </span>
               )}

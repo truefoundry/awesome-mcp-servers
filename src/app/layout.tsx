@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "MCP Server Registry | TrueFoundry",
+  title: "Awesome MCP Servers | TrueFoundry",
   description:
     "Community-maintained registry of Model Context Protocol (MCP) servers. Discover 1300+ MCP servers across 40+ categories for AI integration.",
 };
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased bg-bg-page text-text-primary`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
