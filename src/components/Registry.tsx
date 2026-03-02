@@ -56,153 +56,116 @@ export default function Registry({ servers }: { servers: MCPServer[] }) {
   const officialCount = servers.filter((s) => s.isOfficial).length;
 
   return (
-    <div>
-      {/* Hero — matches truefoundry.com/models hero */}
-      <div className="relative overflow-hidden border-b border-border-default">
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-hero-center via-bg-page to-bg-page opacity-60" />
-        <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-12 sm:px-6 lg:px-8 text-center">
-          {/* Pill badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-border-default bg-bg-surface/60 px-4 py-1.5 text-[13px] text-text-secondary mb-5">
-            <svg className="h-[14px] w-[14px] text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M16.403 12.652a3 3 0 010-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-            </svg>
-            MCP Server Catalog
-          </div>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Title */}
+      <div className="pt-8 pb-6">
+        <h1 className="text-[24px] font-semibold text-text-primary">
+          Awesome MCP Servers
+        </h1>
+        <p className="mt-1.5 text-[14px] text-text-secondary">
+          Browse and compare {servers.length.toLocaleString()}+ MCP servers. Search, filter by category, language, or official status.
+        </p>
+      </div>
 
-          {/* Title */}
-          <h1 className="text-[32px] font-bold tracking-[-0.02em] text-text-primary sm:text-[40px]">
-            Supported MCP Servers
-          </h1>
-
-          {/* Subtitle */}
-          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-[1.6] text-text-secondary">
-            Browse and compare MCP servers from the community. Search, filter,
-            and sort by categories, features, and languages.
-          </p>
-
-          {/* Search row — full width search + language dropdown */}
-          <div className="mx-auto mt-8 flex max-w-3xl gap-3">
-            <SearchBar
-              value={search}
-              onChange={(val) => {
-                setSearch(val);
-                setVisibleCount(ITEMS_PER_PAGE);
-              }}
-              totalCount={servers.length}
-              filteredCount={filtered.length}
-            />
-            <LanguageFilter
-              languages={[...LANGUAGES]}
-              selected={language}
-              onChange={(l) => {
-                setLanguage(l);
-                setVisibleCount(ITEMS_PER_PAGE);
-              }}
-            />
-          </div>
+      {/* Search + filters */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <SearchBar
+          value={search}
+          onChange={(val) => { setSearch(val); setVisibleCount(ITEMS_PER_PAGE); }}
+          totalCount={servers.length}
+          filteredCount={filtered.length}
+        />
+        <div className="flex items-center gap-2">
+          <LanguageFilter
+            languages={[...LANGUAGES]}
+            selected={language}
+            onChange={(l) => { setLanguage(l); setVisibleCount(ITEMS_PER_PAGE); }}
+          />
+          <button
+            onClick={() => { setShowOfficial(!showOfficial); setVisibleCount(ITEMS_PER_PAGE); }}
+            className={`flex items-center gap-1.5 rounded-lg border px-3 py-2 text-[13px] transition-all whitespace-nowrap ${
+              showOfficial
+                ? "border-emerald-600/30 bg-emerald-50 text-emerald-700"
+                : "border-border-color bg-bg-input text-text-secondary hover:text-text-primary hover:border-border-hover"
+            }`}
+          >
+            Official ({officialCount})
+          </button>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        {/* Count row */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <span className="text-[14px] font-medium text-text-primary">
-              {filtered.length.toLocaleString()} servers
-            </span>
-            <button
-              onClick={() => {
-                setShowOfficial(!showOfficial);
-                setVisibleCount(ITEMS_PER_PAGE);
-              }}
-              className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-medium transition-all ${
-                showOfficial
-                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-                  : "border-border-default text-text-muted hover:border-border-light hover:text-text-secondary"
-              }`}
-            >
-              <svg className="h-[12px] w-[12px]" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M16.403 12.652a3 3 0 010-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-              </svg>
-              Official ({officialCount})
-            </button>
-          </div>
-          {(category !== "All" || language !== "All" || showOfficial || search) && (
-            <button
-              onClick={resetFilters}
-              className="text-[13px] text-text-muted hover:text-text-secondary transition-colors"
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
+      {/* Count + clear */}
+      <div className="mt-4 flex items-center justify-between">
+        <span className="text-[13px] text-text-dim">
+          {filtered.length.toLocaleString()} servers
+        </span>
+        {(category !== "All" || language !== "All" || showOfficial || search) && (
+          <button onClick={resetFilters} className="text-[13px] text-text-dim hover:text-text-secondary">
+            Clear filters
+          </button>
+        )}
+      </div>
 
-        {/* Category pills */}
+      {/* Category pills */}
+      <div className="mt-3">
         <CategoryFilter
           categories={[...CATEGORIES]}
           selected={category}
-          onChange={(cat) => {
-            setCategory(cat);
-            setVisibleCount(ITEMS_PER_PAGE);
-          }}
+          onChange={(cat) => { setCategory(cat); setVisibleCount(ITEMS_PER_PAGE); }}
           counts={categoryCounts}
         />
-
-        {/* Card grid */}
-        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((server, i) => (
-            <ServerCard key={`${server.repo}-${i}`} server={server} />
-          ))}
-        </div>
-
-        {/* Empty state */}
-        {filtered.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <svg className="h-10 w-10 text-text-muted/30" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-            <p className="mt-3 text-[15px] font-medium text-text-primary">No servers found</p>
-            <p className="mt-1 text-[13px] text-text-muted">Try adjusting your search or filter criteria.</p>
-            <button onClick={resetFilters} className="mt-4 text-[13px] font-medium text-accent-purple hover:text-accent-purple-hover">
-              Clear all filters
-            </button>
-          </div>
-        )}
-
-        {/* Pagination / Load more */}
-        {hasMore && (
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <span className="text-[13px] text-text-muted">
-              Showing {Math.min(visibleCount, filtered.length).toLocaleString()} of {filtered.length.toLocaleString()} servers
-            </span>
-            <button
-              onClick={() => setVisibleCount((c) => c + ITEMS_PER_PAGE)}
-              className="rounded-md border border-border-default bg-bg-surface px-4 py-1.5 text-[13px] font-medium text-text-secondary transition-all hover:border-border-light hover:text-text-primary"
-            >
-              Next
-            </button>
-          </div>
-        )}
-
-        {/* Footer */}
-        <footer className="mt-16 border-t border-border-default pt-6 pb-8">
-          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-            <p className="text-[12px] text-text-muted">
-              Data sourced from{" "}
-              <a href="https://github.com/punkpeye/awesome-mcp-servers" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary underline underline-offset-2 decoration-border-default">
-                awesome-mcp-servers
-              </a>
-            </p>
-            <p className="text-[12px] text-text-muted">
-              Built by{" "}
-              <a href="https://www.truefoundry.com" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary underline underline-offset-2 decoration-border-default">
-                TrueFoundry
-              </a>
-            </p>
-          </div>
-        </footer>
       </div>
+
+      {/* Card grid */}
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {visible.map((server, i) => (
+          <ServerCard key={`${server.repo}-${i}`} server={server} />
+        ))}
+      </div>
+
+      {/* Empty state */}
+      {filtered.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <p className="text-[15px] text-text-primary">No servers found</p>
+          <p className="mt-1 text-[13px] text-text-dim">Try adjusting your search or filter criteria.</p>
+          <button onClick={resetFilters} className="mt-3 text-[13px] text-accent-blue hover:text-accent-blue/80">
+            Clear all filters
+          </button>
+        </div>
+      )}
+
+      {/* Load more */}
+      {hasMore && (
+        <div className="mt-8 flex items-center justify-center gap-4">
+          <span className="text-[13px] text-text-dim">
+            Showing {Math.min(visibleCount, filtered.length).toLocaleString()} of {filtered.length.toLocaleString()}
+          </span>
+          <button
+            onClick={() => setVisibleCount((c) => c + ITEMS_PER_PAGE)}
+            className="rounded-md border border-border-color px-4 py-1.5 text-[13px] text-text-secondary hover:border-border-hover hover:text-text-primary"
+          >
+            Load more
+          </button>
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer className="mt-16 border-t border-border-color pt-6 pb-8">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
+          <p className="text-[12px] text-text-dim">
+            Data from{" "}
+            <a href="https://github.com/punkpeye/awesome-mcp-servers" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary underline underline-offset-2">
+              awesome-mcp-servers
+            </a>
+          </p>
+          <p className="text-[12px] text-text-dim">
+            Built by{" "}
+            <a href="https://www.truefoundry.com" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary underline underline-offset-2">
+              TrueFoundry
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

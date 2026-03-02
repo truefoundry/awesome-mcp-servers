@@ -19,15 +19,15 @@ export default function ServerCard({ server }: { server: MCPServer }) {
       href={server.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col justify-between rounded-lg border border-border-default bg-bg-secondary p-5 transition-all duration-200 hover:border-border-light hover:bg-bg-surface min-h-[148px]"
+      className="group flex flex-col justify-between rounded-lg border border-border-color bg-bg-card p-5 transition-all duration-150 hover:border-border-hover hover:shadow-sm min-h-[148px]"
     >
       <div>
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-[14px] font-semibold text-text-primary leading-snug min-w-0 group-hover:text-accent-purple-hover transition-colors">
+          <h3 className="text-[14px] font-semibold text-text-primary leading-snug min-w-0">
             {server.name}
           </h3>
           {server.isOfficial && (
-            <span className="shrink-0 rounded-[4px] bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-emerald-400 border border-emerald-500/20 uppercase">
+            <span className="shrink-0 rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-emerald-700 border border-emerald-200 uppercase">
               Official
             </span>
           )}
@@ -37,21 +37,21 @@ export default function ServerCard({ server }: { server: MCPServer }) {
         </p>
       </div>
       <div className="mt-3.5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {server.language && (
-            <div className="flex items-center gap-1.5">
+            <>
               <span
-                className={`inline-block h-[8px] w-[8px] rounded-full ${
-                  languageColors[server.language] || "bg-[#6b6578]"
+                className={`inline-block h-2 w-2 rounded-full ${
+                  languageColors[server.language] || "bg-[#94a3b8]"
                 }`}
               />
-              <span className="text-[12px] text-text-muted">
+              <span className="text-[12px] text-text-dim">
                 {server.language}
               </span>
-            </div>
+            </>
           )}
         </div>
-        <span className="rounded-full bg-bg-elevated px-2 py-0.5 text-[11px] font-medium text-text-muted">
+        <span className="rounded-full border border-border-color px-2 py-0.5 text-[11px] text-text-dim">
           {server.category}
         </span>
       </div>

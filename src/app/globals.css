@@ -1,37 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --bg-page: #100c18;
-  --bg-secondary: #181225;
-  --bg-surface: #1e1730;
-  --bg-elevated: #261e38;
-  --bg-hero-center: #1a1230;
-  --border-default: #2a2240;
-  --border-light: #342c4a;
-  --text-primary: #eeedf2;
-  --text-secondary: #9a96a6;
-  --text-muted: #6b6578;
-  --accent-purple: #5429FF;
-  --accent-purple-hover: #6b46ff;
+  --bg-page: #f8f9fb;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --text-primary: #1a1a2e;
+  --text-secondary: #475569;
+  --text-dim: #94a3b8;
   --accent-orange: #f97316;
-  --accent-orange-hover: #fb923c;
+  --accent-orange-hover: #ea580c;
+  --accent-blue: #5429FF;
 }
 
 @theme inline {
   --color-bg-page: var(--bg-page);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-bg-surface: var(--bg-surface);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-bg-hero-center: var(--bg-hero-center);
-  --color-border-default: var(--border-default);
-  --color-border-light: var(--border-light);
+  --color-bg-card: var(--bg-card);
+  --color-bg-input: var(--bg-input);
+  --color-border-color: var(--border-color);
+  --color-border-hover: var(--border-hover);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-accent-purple: var(--accent-purple);
-  --color-accent-purple-hover: var(--accent-purple-hover);
+  --color-text-dim: var(--text-dim);
   --color-accent-orange: var(--accent-orange);
   --color-accent-orange-hover: var(--accent-orange-hover);
+  --color-accent-blue: var(--accent-blue);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
