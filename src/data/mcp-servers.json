@@ -2988,6 +2988,15 @@
     "isOfficial": false
   },
   {
+    "name": "manticoresoftware/mcp-manticore",
+    "repo": "manticoresoftware/mcp-manticore",
+    "url": "https://github.com/manticoresoftware/mcp-manticore",
+    "description": "MCP server for Manticore Search — enables AI assistants to query and manage Manticore Search databases directly",
+    "category": "Databases",
+    "language": "Python",
+    "isOfficial": false
+  },
+  {
     "name": "memgraph/mcp-memgraph",
     "repo": "memgraph/ai-toolkit",
     "url": "https://github.com/memgraph/ai-toolkit/tree/main/integrations/mcp-memgraph",
