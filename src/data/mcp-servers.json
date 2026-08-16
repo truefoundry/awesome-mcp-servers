@@ -1062,6 +1062,15 @@
     "isOfficial": false
   },
   {
+    "name": "vostride/agent-qa",
+    "repo": "vostride/agent-qa",
+    "url": "https://github.com/vostride/agent-qa",
+    "description": "Defines, validates, runs, and triages natural-language web and mobile tests with persistent run memory and configurable browser, device, and model providers.",
+    "category": "Browser Automation",
+    "language": "TypeScript",
+    "isOfficial": false
+  },
+  {
     "name": "xspadex/bilibili-mcp",
     "repo": "xspadex/bilibili-mcp.git",
     "url": "https://github.com/xspadex/bilibili-mcp.git",
