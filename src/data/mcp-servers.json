@@ -12121,5 +12121,14 @@
     "category": "Other",
     "language": "Python",
     "isOfficial": false
+  },
+  {
+    "name": "nuanu-ai/agent-payment-node",
+    "repo": "nuanu-ai/agent-payment-node",
+    "url": "https://github.com/nuanu-ai/agent-payment-node",
+    "description": "Local stdio MCP tools for x402 offer inspection, bounded payment preparation and status/receipts; Apple Silicon macOS and Node 24 only.",
+    "category": "Finance",
+    "language": "TypeScript",
+    "isOfficial": false
   }
 ]
